@@ -187,7 +187,7 @@ code { padding: .14em .35em; color: #34510a; background: #e4edc8; border-radius:
 .archive-post a:hover h3 { font-family: var(--serif); font-style: italic; }
 .archive-post span { color: var(--muted); font: .63rem var(--mono); }
 
-.about-page { width: min(1120px, 100%); min-height: 58vh; margin: auto; padding: clamp(3rem, 7vw, 6.5rem) clamp(1.25rem, 4vw, 4rem); display: grid; grid-template-columns: minmax(280px, 1.1fr) minmax(280px, .9fr); align-items: start; gap: clamp(3rem, 9vw, 9rem); }
+.about-page { width: min(1120px, 100%); min-height: 58vh; margin: auto; padding: clamp(3rem, 7vw, 6.5rem) clamp(1.25rem, 4vw, 4rem); display: grid; grid-template-columns: minmax(280px, 1.1fr) minmax(280px, .9fr); align-items: start; gap: clamp(3rem, 9vw, 9rem); display: flex; flex-direction: column;}
 .about-page h1 { margin-top: .85rem; font-size: clamp(3.8rem, 7vw, 7rem); line-height: .84; }
 .about-page__lead { max-width: 420px; margin: 2rem 0 0; color: var(--muted); font: .9rem/1.5 var(--mono); }
 .about-page__content { padding-top: .5rem; }
