@@ -1,0 +1,32 @@
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-brand" href="{{ '/' | relative_url }}" aria-label="{{ site.title }}, inicio">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 4h10v4H8v16h6v4H4zM18 4h10v24H18v-4h6V8h-6zM18 10v12h-4V10z" fill="currentColor" /></svg>
+      <span>0WL<span class="brand-muted">.SEC</span></span>
+    </a>
+
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+      <span class="sr-only">Abrir navegación</span>
+      <span></span><span></span>
+    </button>
+
+    <nav class="site-nav" id="primary-nav" aria-label="Navegación principal">
+      {% for link in site.nav_links %}
+        <a href="{{ link.url | relative_url }}" {% if page.url == link.url %}aria-current="page"{% endif %}>{{ link.title | remove: '🏷️' | remove: '📁' | remove: '🔥' }}</a>
+      {% endfor %}
+      <a class="nav-portfolio" href="https://0wlsec.xyz/" target="_blank" rel="noreferrer">Portfolio <span>↗</span></a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const menuToggle = document.querySelector('.menu-toggle');
+  const siteNav = document.querySelector('.site-nav');
+  if (menuToggle && siteNav) {
+    menuToggle.addEventListener('click', () => {
+      const isOpen = siteNav.classList.toggle('is-open');
+      menuToggle.classList.toggle('is-open', isOpen);
+      menuToggle.setAttribute('aria-expanded', isOpen);
+    });
+  }
+</script>

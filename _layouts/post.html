@@ -1,0 +1,24 @@
+---
+layout: default
+---
+
+<article class="post-shell">
+  <header class="post-hero">
+    <a class="back-link" href="{{ '/' | relative_url }}#archive">← Archivo</a>
+    <p class="eyebrow"><i></i>{{ page.categories | first | default: 'WRITEUP' }}</p>
+    <h1>{{ page.title }}</h1>
+    <div class="post-meta-row">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d.%m.%Y" }}</time>
+      <span>Investigación técnica</span>
+      <span>{{ page.tags | size }} etiquetas</span>
+    </div>
+    {% if page.tags and page.tags.size > 0 %}
+      <div class="post-tags">
+        {% for tag in page.tags %}<a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">#{{ tag }}</a>{% endfor %}
+      </div>
+    {% endif %}
+  </header>
+  <div class="post-content prose">
+    {{ content | replace: '<img ', '<img loading="lazy" class="post-content-image" tabindex="0" role="button" aria-label="Abrir captura ampliada" ' }}
+  </div>
+</article>

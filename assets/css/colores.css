@@ -1,0 +1,30 @@
+/* === Colores de texto para fondo oscuro (#333533) === */
+/* Neutros */
+.color-text-white        { color: #ffffff; }
+.color-text-light-gray   { color: #E8EDDF; }
+.color-text-gray         { color: #BFC8C0; }
+.color-text-dark-gray    { color: #6B705C; }
+
+/* Rojos y naranjas */
+.color-text-red          { color: #FF3C38; }
+.color-text-orange       { color: #FFA500; }
+.color-text-salmon       { color: #FA8072; }
+
+/* Verdes */
+.color-text-green        { color: #A3B18A; }
+.color-text-lime         { color: #B6FF7A; }
+.color-text-teal         { color: #5FB49C; }
+
+/* Azules */
+.color-text-blue         { color: #4EA8DE; }
+.color-text-cyan         { color: #00FFFF; }
+.color-text-navy         { color: #1F6F8B; }
+
+/* Violetas y rosas */
+.color-text-purple       { color: #9D4EDD; }
+.color-text-pink         { color: #FF77FF; }
+.color-text-magenta      { color: #FF00FF; }
+
+/* Amarillos */
+.color-text-yellow       { color: #FFD700; }
+.color-text-gold         { color: #FFC300; }

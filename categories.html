@@ -1,0 +1,46 @@
+---
+title: Categorías
+permalink: /categories/
+layout: default
+---
+
+<section class="archive-view" aria-labelledby="categories-title">
+  <header>
+    <div>
+      <p class="eyebrow"><i></i> INDEX / CATEGORÍAS</p>
+      <h1 id="categories-title">Navega por<br /><em>superficie.</em></h1>
+    </div>
+    <p>Encuentra writeups agrupados por plataforma, técnica o área de investigación.</p>
+  </header>
+  <label class="sr-only" for="filter-box">Filtrar categorías</label>
+  <input class="archive-search" id="filter-box" type="search" placeholder="Filtrar categorías…" autocomplete="off" />
+  <nav class="archive-pills" aria-label="Índice de categorías">
+    {% for category in site.categories %}{% assign name = category[0] %}<a href="#{{ name | slugify }}">{{ name }}</a>{% endfor %}
+  </nav>
+  <div id="archive-results">
+    {% for category in site.categories %}
+      {% assign category_name = category[0] %}
+      {% assign posts = category[1] %}
+      <section class="archive-block category-block" data-category="{{ category_name | downcase }}" id="{{ category_name | slugify }}">
+        <h2>{{ category_name | upcase }} / {{ posts | size }} WRITEUP{% if posts.size != 1 %}S{% endif %}</h2>
+        {% for post in posts %}
+          <article class="archive-post">
+            <a href="{{ post.url | relative_url }}"><h3>{{ post.title | escape }}</h3></a>
+            <span>{{ post.date | date: "%d.%m.%Y" }} · {{ post.tags | first | default: 'writeup' }}</span>
+          </article>
+        {% endfor %}
+      </section>
+    {% endfor %}
+  </div>
+</section>
+
+<script>
+  const filterBox = document.getElementById('filter-box');
+  const categoryBlocks = document.querySelectorAll('.category-block');
+  filterBox?.addEventListener('input', (event) => {
+    const query = event.target.value.trim().toLowerCase();
+    categoryBlocks.forEach((block) => {
+      block.hidden = !block.dataset.category.includes(query);
+    });
+  });
+</script>

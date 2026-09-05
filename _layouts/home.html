@@ -1,0 +1,104 @@
+---
+layout: default
+---
+
+{% assign latest = site.posts | first %}
+{% assign remaining_posts = site.posts | slice: 1, 6 %}
+{% assign latest_image = latest.image | remove_first: '../' %}
+
+<section class="home-hero" aria-labelledby="hero-title">
+  <div class="eyebrow status-line"><span></span> SISTEMAS, SEGURIDAD Y CURIOSIDAD · EST. 2024</div>
+  <div class="hero-grid">
+    <div>
+      <p class="hero-kicker">Notas de campo para<br /><span>mentes que no aceptan la interfaz.</span></p>
+      <h1 id="hero-title">Mira <em>detrás</em><br />del <span class="outline-word">sistema</span><span class="cursor">_</span></h1>
+    </div>
+    <aside class="hero-aside">
+      <p>Writeups prácticos, investigación ofensiva y aprendizajes que vale la pena documentar.</p>
+      <a href="#archive">Explorar el archivo <span>↓</span></a>
+    </aside>
+  </div>
+  <div class="hero-index"><span>SCROLL TO DECODE</span><i></i><span>01 — 04</span></div>
+</section>
+
+<section class="signal-tape" aria-label="Áreas de interés">
+  <div><span>HACK THE BOX</span><b>✦</b><span>VULNYX</span><b>✦</b><span>WEB SECURITY</span><b>✦</b><span>ACTIVE DIRECTORY</span><b>✦</b><span>PRIVILEGE ESCALATION</span><b>✦</b><span>HACK THE BOX</span><b>✦</b><span>VULNYX</span><b>✦</b><span>WEB SECURITY</span><b>✦</b></div>
+</section>
+
+{% if latest %}
+<section class="featured-section" aria-labelledby="featured-title">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow"><i></i> ÚLTIMO WRITEUP</p>
+      <h2 id="featured-title">El último<br /><em>hallazgo.</em></h2>
+    </div>
+    <p>Una colección de rutas, errores y decisiones que convierten una máquina en una historia reproducible.</p>
+  </div>
+  <article class="featured-card">
+    <a class="card-hitbox" href="{{ latest.url | relative_url }}" aria-label="Leer {{ latest.title | escape }}"></a>
+    <div class="card-topline"><span class="eyebrow"><i></i>{{ latest.categories | first | default: 'WRITEUP' }}</span><span>VL.LATEST</span></div>
+    <div class="featured-card__layout">
+      {% if latest.image %}
+      <div class="machine-screen">
+        <div class="machine-screen__bar"><span></span><span></span><span></span><b>machine.preview</b></div>
+        <img src="{{ latest_image | relative_url }}" alt="Logo de la máquina {{ latest.title | escape }}" />
+      </div>
+      {% endif %}
+      <div class="featured-content">
+        <p class="machine-label">{{ latest.tags | first | default: 'Security research' }}</p>
+        <h3>{{ latest.title | escape }}</h3>
+        <p>{{ latest.excerpt | strip_html | strip_newlines | truncate: 180 }}</p>
+      </div>
+    </div>
+    <footer><span>{{ latest.date | date: "%d.%m.%Y" }}</span><span>Leer writeup <b>↗</b></span></footer>
+  </article>
+</section>
+{% endif %}
+
+<section class="archive-section" id="archive" aria-labelledby="archive-title">
+  <div class="archive-heading">
+    <div>
+      <p class="eyebrow"><i></i> INDEX / {{ 'now' | date: '%Y' }}</p>
+      <h2 id="archive-title">Archivo<br /><em>activo.</em></h2>
+    </div>
+    <a class="round-link" href="{{ '/categories/' | relative_url }}">Ver<br />todo <span>↗</span></a>
+  </div>
+  <div class="writeup-grid">
+    {% for post in remaining_posts %}
+      {% assign post_image = post.image | remove_first: '../' %}
+      <article class="writeup-card accent-{{ forloop.index }}">
+        <a class="card-hitbox" href="{{ post.url | relative_url }}" aria-label="Leer {{ post.title | escape }}"></a>
+        <div class="card-topline"><span class="eyebrow"><i></i>{{ post.categories | first | default: 'WRITEUP' }}</span><span>VL.0{{ forloop.index | plus: 1 }}</span></div>
+        {% if post.image %}
+        <div class="machine-preview">
+          <span><i></i><i></i><i></i> {{ post.categories | first | default: 'machine' }}.img</span>
+          <img src="{{ post_image | relative_url }}" alt="Logo de la máquina {{ post.title | escape }}" loading="lazy" />
+        </div>
+        {% endif %}
+        <div class="writeup-card-body">
+          <h3>{{ post.title | escape }}</h3>
+          <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 120 }}</p>
+        </div>
+        <footer><span>{{ post.date | date: "%d.%m.%Y" }}</span><span>{{ post.tags | first | default: 'Read more' }} <b>↗</b></span></footer>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="topics-section" aria-labelledby="topics-title">
+  <div class="orbit-art" aria-hidden="true"><span class="orbit o-one"></span><span class="orbit o-two"></span><span class="orbit o-three"></span><strong>ATTACK<br />SURFACE</strong><b class="cross x-one">+</b><b class="cross x-two">+</b></div>
+  <div>
+    <p class="eyebrow"><i></i> MAPA DE INTERESES</p>
+    <h2 id="topics-title">Las piezas<br />del <em>rompecabezas.</em></h2>
+    <div class="topic-tags">
+      {% assign all_tags = site.tags | sort %}
+      {% for tag in all_tags limit: 10 %}<a href="{{ '/tags/' | relative_url }}#{{ tag[0] | slugify }}"><span>0{{ forloop.index }}</span>{{ tag[0] }}</a>{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="home-manifesto" aria-labelledby="manifesto-title">
+  <span class="manifesto-index">// 0x01</span>
+  <div><p class="eyebrow"><i></i> SOBRE ESTE ESPACIO</p><h2 id="manifesto-title">Curiosidad<br />con <em>criterio.</em></h2></div>
+  <div class="manifesto-body"><p>Un espacio para convertir el aprendizaje en conocimiento compartido. Cada writeup conserva los pasos, los tropiezos y las ideas que dejan una huella útil para el siguiente reto.</p><a href="{{ '/about_me/' | relative_url }}">Conocer más <span>↗</span></a></div>
+</section>

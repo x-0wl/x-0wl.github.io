@@ -1,0 +1,46 @@
+---
+title: Tags
+permalink: /tags/
+layout: default
+---
+
+<section class="archive-view" aria-labelledby="tags-title">
+  <header>
+    <div>
+      <p class="eyebrow"><i></i> INDEX / ETIQUETAS</p>
+      <h1 id="tags-title">Sigue la<br /><em>señal.</em></h1>
+    </div>
+    <p>Una taxonomía viva de herramientas, vectores y conceptos que aparecen a lo largo de los writeups.</p>
+  </header>
+  <label class="sr-only" for="filter-box">Filtrar etiquetas</label>
+  <input class="archive-search" id="filter-box" type="search" placeholder="Filtrar etiquetas…" autocomplete="off" />
+  <nav class="archive-pills" aria-label="Índice de etiquetas">
+    {% for tag in site.tags %}{% assign name = tag[0] %}<a href="#{{ name | slugify }}">{{ name }}</a>{% endfor %}
+  </nav>
+  <div id="archive-results">
+    {% for tag in site.tags %}
+      {% assign tag_name = tag[0] %}
+      {% assign posts = tag[1] %}
+      <section class="archive-block tag-block" data-tag="{{ tag_name | downcase }}" id="{{ tag_name | slugify }}">
+        <h2>#{{ tag_name | upcase }} / {{ posts | size }} WRITEUP{% if posts.size != 1 %}S{% endif %}</h2>
+        {% for post in posts %}
+          <article class="archive-post">
+            <a href="{{ post.url | relative_url }}"><h3>{{ post.title | escape }}</h3></a>
+            <span>{{ post.date | date: "%d.%m.%Y" }} · {{ post.categories | first | default: 'writeup' }}</span>
+          </article>
+        {% endfor %}
+      </section>
+    {% endfor %}
+  </div>
+</section>
+
+<script>
+  const filterBox = document.getElementById('filter-box');
+  const tagBlocks = document.querySelectorAll('.tag-block');
+  filterBox?.addEventListener('input', (event) => {
+    const query = event.target.value.trim().toLowerCase();
+    tagBlocks.forEach((block) => {
+      block.hidden = !block.dataset.tag.includes(query);
+    });
+  });
+</script>
